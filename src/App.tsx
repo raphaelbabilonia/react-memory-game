@@ -357,12 +357,12 @@ const App: React.FC = () => {
                 </ScoreContainer>
                 
                 <Instructions>
-                  {gameStatus === 'display' 
+                  {gameStatus === 'display' && displayNumber !== -1
                     ? `Livello ${currentLevel}` 
                     : gameStatus === 'success'
                       ? 'Corretto!'
                       : gameStatus === 'failure'
-                        ? 'Sbagliato! Riprova'
+                        ? 'Sbagliato!'
                         : ''}
                 </Instructions>
                 
@@ -427,9 +427,15 @@ const App: React.FC = () => {
               {(gameStatus === 'gameover' || gameStatus === 'failure') && (
                 <FailureScreenContainer>
                   {gameStatus === 'failure' && (
-                    <FailureMessage>
-                      Sbagliato!<br />Riprova
-                    </FailureMessage>
+                    <>
+                      <FailureMessage>
+                        Sbagliato!<br />Riprova
+                      </FailureMessage>
+                      <ScoreContainer style={{ margin: '0 0 1.5rem 0' }}>
+                        <ScoreLabel>Punteggio</ScoreLabel>
+                        <ScoreValue>{score}</ScoreValue>
+                      </ScoreContainer>
+                    </>
                   )}
                   <RestartButton 
                     onClick={handleButtonWithSound(restartGame)}

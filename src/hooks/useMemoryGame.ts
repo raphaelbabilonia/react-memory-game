@@ -158,6 +158,7 @@ const useMemoryGame = ({
   // Start the game
   const startGame = useCallback(() => {
     debugLog('Starting game');
+    
     // Clear any existing timers first
     if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -169,13 +170,13 @@ const useMemoryGame = ({
     }
 
     // Reset all game state
+    displayIndexRef.current = 0;
+    setUserInput('');
+    setDisplayNumber(null);
     setScore(0);
     const startLevel = getInitialLevel();
     setCurrentLevel(startLevel);
-    setUserInput('');
     setTimeRemaining(timeLimit);
-    setGameStatus('idle');
-    displayIndexRef.current = 0;
     
     // Reset hint usage only at game start
     setHintUsed(false);
@@ -200,6 +201,9 @@ const useMemoryGame = ({
       });
     }, 1000);
 
+    // First set status to display to make UI appear
+    setGameStatus('display');
+    
     // Start the display sequence process
     const startTimer = setTimeout(() => {
       debugLog('Showing GET READY message');
@@ -223,15 +227,21 @@ const useMemoryGame = ({
     }, 500);
     
     timerRef.current = startTimer;
-  }, [timeLimit, startDisplaySequence, debugLog]);
+  }, [timeLimit, startDisplaySequence, getInitialLevel, debugLog]);
 
   // Restart the game
   const restartGame = useCallback(() => {
     debugLog('Restarting game');
-    setGameStatus('idle');
+    
+    // First stop everything and reset
+    setGameStatus('initial');
     setUserInput('');
     setDisplayNumber(null);
-
+    displayIndexRef.current = 0;
+    setHintUsed(false);
+    setScore(0);
+    setCurrentLevel(getInitialLevel());
+    
     // Clear any existing timers
     if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -243,9 +253,12 @@ const useMemoryGame = ({
       gameTimerRef.current = null;
     }
 
-    // Start a new game
-    startGame();
-  }, [startGame, debugLog]);
+    // Give the system a moment to fully reset before starting again
+    setTimeout(() => {
+      startGame();
+    }, 100);
+    
+  }, [debugLog, getInitialLevel, startGame]);
 
   // Handle user input
   const handleUserInput = useCallback((num: number) => {
@@ -292,11 +305,9 @@ const useMemoryGame = ({
       debugLog('Wrong answer!');
       setGameStatus('failure');
 
+      // We keep the current score instead of resetting to 0
       setTimeout(() => {
-        // Restart from level 1
-        debugLog('Resetting to level 1');
-        setCurrentLevel(getInitialLevel());
-        setScore(0);
+        // Persist the score instead of resetting
         setUserInput('');
       }, 1000);
     }
@@ -357,9 +368,6 @@ const useMemoryGame = ({
       // Reset display index before generating a new sequence
       displayIndexRef.current = 0;
       
-      // Removed the hint reset for new levels to make hint usable only once per game
-      // setHintUsed(false);
-      
       // Generate new sequence for next level
       const newSequence = generateSequence();
       debugLog(`New sequence for level ${currentLevel}:`, newSequence);
@@ -394,7 +402,11 @@ const useMemoryGame = ({
 
   // Cleanup effect
   useEffect(() => {
+    // Flag to track if the component is mounted
+    let isMounted = true;
+    
     return () => {
+      isMounted = false;
       debugLog('Cleaning up timers');
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -427,4 +439,4 @@ const useMemoryGame = ({
   };
 };
 
-export default useMemoryGame; 
+export default useMemoryGame;
