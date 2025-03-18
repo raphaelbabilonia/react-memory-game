@@ -28,6 +28,8 @@ import useMemoryGame from './hooks/useMemoryGame';
 import useSounds from './hooks/useSounds';
 import NumberDisplay from './components/NumberDisplay';
 import Numpad from './components/Numpad';
+// Import React Icons
+import { FaVolumeUp, FaVolumeMute, FaBug, FaBrain, FaRedo, FaTrash, FaPaperPlane, FaLightbulb, FaPlay } from 'react-icons/fa';
 
 // Debug panel styled component
 const DebugPanel = styled.div`
@@ -129,6 +131,10 @@ const SoundButton = styled.button`
   
   &:hover {
     transform: scale(1.1);
+  }
+
+  svg {
+    vertical-align: middle;
   }
 `;
 
@@ -306,14 +312,14 @@ const App: React.FC = () => {
               onClick={toggleSound} 
               aria-label={soundEnabled ? 'Disattiva suono' : 'Attiva suono'}
             >
-              {soundEnabled ? '🔊' : '🔇'}
+              {soundEnabled ? <FaVolumeUp /> : <FaVolumeMute />}
             </SoundButton>
             <button 
               onClick={() => setShowDebug(prev => !prev)} 
               style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}
               aria-label={showDebug ? 'Nascondi Debug' : 'Mostra Debug'}
             >
-              {showDebug ? 'Nascondi Debug' : 'Debug'}
+              <FaBug />
             </button>
           </div>
         </GameHeader>
@@ -330,7 +336,7 @@ const App: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Inizia Gioco
+                <FaPlay style={{ marginRight: '8px' }} /> Inizia Gioco
               </StartButton>
             </WelcomeContainer>
           ) : (
@@ -381,7 +387,7 @@ const App: React.FC = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Cancella
+                      <FaTrash style={{ marginRight: '8px' }} /> Cancella
                     </ClearButton>
                     
                     <SubmitButton 
@@ -390,7 +396,7 @@ const App: React.FC = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Invia
+                      <FaPaperPlane style={{ marginRight: '8px' }} /> Invia
                     </SubmitButton>
                   </ButtonGroup>
                   
@@ -404,7 +410,7 @@ const App: React.FC = () => {
                       cursor: hintUsed ? 'not-allowed' : 'pointer'
                     }}
                   >
-                    {hintUsed ? 'Aiuto Usato' : 'Vedi di nuovo la Sequenza'}
+                    <FaLightbulb style={{ marginRight: '8px' }} /> {hintUsed ? 'Aiuto Usato' : 'Vedi di nuovo la Sequenza'}
                   </HintButton>
                 </GameInputSection>
               )}
@@ -421,7 +427,7 @@ const App: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Ricomincia
+                    <FaRedo style={{ marginRight: '8px' }} /> Ricomincia
                   </RestartButton>
                 </FailureScreenContainer>
               )}
@@ -463,6 +469,7 @@ const App: React.FC = () => {
                   Forza Riavvio
                 </button>
                 <button onClick={toggleSound}>
+                  {soundEnabled ? <FaVolumeUp style={{ marginRight: '5px' }} /> : <FaVolumeMute style={{ marginRight: '5px' }} />}
                   {soundEnabled ? 'Disattiva Suono' : 'Attiva Suono'}
                 </button>
                 <button onClick={testSounds} disabled={!soundEnabled}>
