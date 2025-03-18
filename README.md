@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# React Memory Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A memory game built with React where players must remember and repeat an increasing sequence of numbers.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+-  Progressive difficulty: sequences get longer and display time gets shorter as you advance
+-  Visual feedback with animations using Framer Motion
+-  Sound effects for interactions (success, failure, button clicks)
+-  Responsive design optimized for tablet (1200x800 pixels)
+-  Accessibility features with proper ARIA labels
 
-### `npm start`
+## Game Rules
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. The game displays a sequence of random numbers one at a time
+2. After the sequence is shown, you must enter the numbers in the correct order
+3. If you get it right, you advance to the next level with a longer sequence
+4. If you make a mistake, the game resets to level 1
+5. You have 10 minutes to achieve the highest possible score
+6. Your score increases based on the length of sequences you correctly remember
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+-  React 18+ with TypeScript
+-  Styled Components for styling
+-  Framer Motion for animations
+-  Custom React hooks for game logic
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+1. Clone the repository
+   ```
+   git clone https://github.com/raphaelbabilonia/react-memory-game.git
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Start the development server:
+   ```
+   npm start
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Sound Files
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The game uses sound effects for various interactions. For a production application, you would need to add actual sound files in the `public/sounds` directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-  `success.mp3`: Sound played when the player correctly remembers a sequence
+-  `error.mp3`: Sound played when the player makes a mistake
+-  `button.mp3`: Sound played when a button is pressed
+-  `sequence.mp3`: Sound played when a number is displayed in the sequence
 
-### `npm run eject`
+The application is designed to handle missing sound files gracefully.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
