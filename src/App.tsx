@@ -29,7 +29,16 @@ import useSounds from './hooks/useSounds';
 import NumberDisplay from './components/NumberDisplay';
 import Numpad from './components/Numpad';
 // Import React Icons
-import { FaVolumeUp, FaVolumeMute, FaBug, FaBrain, FaRedo, FaTrash, FaPaperPlane, FaLightbulb, FaPlay } from 'react-icons/fa';
+import { 
+  FaVolumeUp, 
+  FaVolumeMute, 
+  FaBug, 
+  FaRedo, 
+  FaTrash, 
+  FaPaperPlane, 
+  FaLightbulb, 
+  FaPlay 
+} from 'react-icons/fa';
 
 // Debug panel styled component
 const DebugPanel = styled.div`
