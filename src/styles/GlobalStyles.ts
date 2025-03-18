@@ -10,18 +10,20 @@ const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     overflow: hidden;
     height: 100%;
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
   }
   
   button {
     cursor: pointer;
     user-select: none;
     -webkit-touch-callout: none;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   /* Improved media queries for different device sizes */

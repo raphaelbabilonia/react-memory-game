@@ -323,13 +323,13 @@ const App: React.FC = () => {
             >
               {soundEnabled ? <FaVolumeUp /> : <FaVolumeMute />}
             </SoundButton>
-            <button 
+{/*             <button 
               onClick={() => setShowDebug(prev => !prev)} 
               style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}
               aria-label={showDebug ? 'Nascondi Debug' : 'Mostra Debug'}
             >
               <FaBug />
-            </button>
+            </button> */}
           </div>
         </GameHeader>
         
@@ -345,7 +345,7 @@ const App: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <FaPlay style={{ marginRight: '8px' }} /> Inizia Gioco
+                 <p>Inizia Gioco</p><FaPlay />
               </StartButton>
             </WelcomeContainer>
           ) : (
@@ -396,7 +396,7 @@ const App: React.FC = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <FaTrash style={{ marginRight: '8px' }} /> Cancella
+                      <span style={{ marginRight: '8px' }}><FaTrash /></span> Cancella
                     </ClearButton>
                     
                     <SubmitButton 
@@ -405,7 +405,7 @@ const App: React.FC = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <FaPaperPlane style={{ marginRight: '8px' }} /> Invia
+                      <span style={{ marginRight: '8px' }}><FaPaperPlane /></span> Invia
                     </SubmitButton>
                   </ButtonGroup>
                   
@@ -419,7 +419,7 @@ const App: React.FC = () => {
                       cursor: hintUsed ? 'not-allowed' : 'pointer'
                     }}
                   >
-                    <FaLightbulb style={{ marginRight: '8px' }} /> {hintUsed ? 'Aiuto Usato' : 'Vedi di nuovo la Sequenza'}
+                    <span style={{ marginRight: '8px' }}><FaLightbulb /></span> {hintUsed ? 'Aiuto Usato' : 'Vedi di nuovo la Sequenza'}
                   </HintButton>
                 </GameInputSection>
               )}
@@ -436,7 +436,7 @@ const App: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <FaRedo style={{ marginRight: '8px' }} /> Ricomincia
+                    <span style={{ marginRight: '8px' }}><FaRedo /></span> Ricomincia
                   </RestartButton>
                 </FailureScreenContainer>
               )}
@@ -478,7 +478,7 @@ const App: React.FC = () => {
                   Forza Riavvio
                 </button>
                 <button onClick={toggleSound}>
-                  {soundEnabled ? <FaVolumeUp style={{ marginRight: '5px' }} /> : <FaVolumeMute style={{ marginRight: '5px' }} />}
+                  {soundEnabled ? <span style={{ marginRight: '5px' }}><FaVolumeUp /></span> : <span style={{ marginRight: '5px' }}><FaVolumeMute /></span>}
                   {soundEnabled ? 'Disattiva Suono' : 'Attiva Suono'}
                 </button>
                 <button onClick={testSounds} disabled={!soundEnabled}>

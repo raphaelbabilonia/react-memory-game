@@ -5,11 +5,13 @@ declare module 'styled-components' {
     colors: {
       primary: string;
       secondary: string;
+      accent: string;
       success: string;
       error: string;
       warning: string;
       info: string;
       light: string;
+      neutral: string;
       dark: string;
       text: string;
       background: string;

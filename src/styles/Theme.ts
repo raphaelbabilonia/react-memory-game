@@ -1,17 +1,19 @@
 const theme = {
   colors: {
-    primary: '#4361ee',
-    secondary: '#3f37c9',
+    primary: '#3C096C',       // Purple
+    secondary: '#7025BE',     // Vibrant Purple
+    accent: '#A682FF',        // Lighter purple instead of orange
     success: '#4caf50',
     error: '#f44336',
     warning: '#ff9800',
     info: '#2196f3',
-    light: '#f5f5f5',
-    dark: '#333',
-    text: '#333',
-    background: '#f5f5f5',
+    light: '#FBFBFB',         // Almost White
+    neutral: '#DCDCDF',       // Light Gray
+    dark: '#666666',          // Dark Gray
+    text: '#3C096C',          // Purple for text
+    background: '#FBFBFB',    // Almost White background
     cardBackground: '#fff',
-    border: '#e0e0e0',
+    border: '#DCDCDF',        // Light Gray for borders
   },
   fonts: {
     main: '"Poppins", sans-serif',

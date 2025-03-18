@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NumberDisplay as StyledNumberDisplay, NumberDisplayContainer } from '../styles/StyledComponents';
+import { 
+  NumberDisplay as StyledNumberDisplay, 
+  NumberDisplayContainer,
+  PreparatiDisplay
+} from '../styles/StyledComponents';
 
 interface NumberDisplayProps {
   number: number | null;
@@ -55,28 +59,42 @@ const NumberDisplay: React.FC<NumberDisplayProps> = ({
     <NumberDisplayContainer>      
       <AnimatePresence mode="wait">
         {number !== null && (
-          <StyledNumberDisplay
-            key={number === -1 ? 'ready' : number}
-            as={motion.div}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={numberVariants}
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 150,
-            }}
-            style={number === -1 ? { 
-              fontSize: isLandscape.current ? '1.5rem' : '2rem', 
-              width: isLandscape.current ? '180px' : '220px',
-              whiteSpace: 'nowrap'
-            } : undefined}
-            aria-live="assertive"
-            aria-label={number === -1 ? 'Preparati' : `Numero ${number}`}
-          >
-            {number === -1 ? 'PREPARATI!' : number}
-          </StyledNumberDisplay>
+          number === -1 ? (
+            <PreparatiDisplay
+              key="ready"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={numberVariants}
+              transition={{
+                type: "spring",
+                damping: 20,
+                stiffness: 150,
+              }}
+              aria-live="assertive"
+              aria-label="Preparati"
+            >
+              PREPARATI!
+            </PreparatiDisplay>
+          ) : (
+            <StyledNumberDisplay
+              key={number}
+              as={motion.div}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={numberVariants}
+              transition={{
+                type: "spring",
+                damping: 20,
+                stiffness: 150,
+              }}
+              aria-live="assertive"
+              aria-label={`Numero ${number}`}
+            >
+              {number}
+            </StyledNumberDisplay>
+          )
         )}
       </AnimatePresence>
     </NumberDisplayContainer>

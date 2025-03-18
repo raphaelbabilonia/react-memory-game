@@ -6,13 +6,18 @@ interface Theme {
   colors: {
     primary: string;
     secondary: string;
+    accent: string;
     background: string;
     text: string;
     light: string;
+    neutral: string;
     dark: string;
     success: string;
     error: string;
     warning: string;
+    info: string;
+    cardBackground: string;
+    border: string;
   };
   borderRadius: {
     small: string;
@@ -51,7 +56,7 @@ export const GameHeader = styled.header`
   padding: 1rem;
   height: 80px;
   width: 100%;
-  background: ${({ theme }) => theme.colors.primary};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary} 0%, ${({ theme }) => theme.colors.secondary} 100%);
   color: white;
   
   h1 {
@@ -186,7 +191,7 @@ export const NumpadButton = styled(motion.button)`
   height: 60px;
   border: none;
   border-radius: 12px;
-  background-color: #5785e5;
+  background-color: ${({ theme }) => theme.colors.secondary};
   color: white;
   display: flex;
   align-items: center;
@@ -198,7 +203,7 @@ export const NumpadButton = styled(motion.button)`
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 
   &:hover:not(:disabled) {
-    background-color: #4a75d1;
+    background-color: ${({ theme }) => theme.colors.primary};
     transform: translateY(-3px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   }
@@ -340,97 +345,152 @@ const BaseButton = styled(motion.button)`
   }
 `;
 
-export const ClearButton = styled(BaseButton)`
-  background-color: #FFD384;
-  color: black;
-  flex: 1;
-  max-width: 140px;
-  font-size: 1.2rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-  @media (orientation: landscape) {
-    max-width: 130px;
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-  }
-`;
-
-export const SubmitButton = styled(BaseButton)`
-  background-color: #A7D7C5;
-  color: black;
-  flex: 1;
-  max-width: 140px;
-  font-size: 1.2rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-  @media (orientation: landscape) {
-    max-width: 130px;
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-  }
-`;
-
-export const StartButton = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.colors.primary};
+export const ClearButton = styled(motion.button)`
+  background-color: ${({ theme }) => theme.colors.dark};
   color: white;
-  max-width: 200px;
   font-size: 1.2rem;
-  padding: 1rem 2rem;
-  align-self: center;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.fast};
+  box-shadow: ${({ theme }) => theme.shadows.small};
   
-  @media (orientation: landscape) {
-    max-width: 180px;
-    font-size: 1.1rem;
-    padding: 0.8rem 1.6rem;
-    margin: 0 auto;
+  &:hover:not(:disabled) {
+    background-color: ${({ theme }) => theme.colors.neutral};
+    color: ${({ theme }) => theme.colors.dark};
   }
-`;
-
-export const RestartButton = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  margin-top: 1rem;
-  max-width: 200px;
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
-  align-self: center;
-  
-  @media (orientation: landscape) {
-    margin: 0.5rem auto;
-    max-width: 180px;
-    font-size: 1.1rem;
-    padding: 0.8rem 1.6rem;
-  }
-`;
-
-export const HintButton = styled(BaseButton)`
-  background-color: #4547a9;
-  color: white;
-  width: 100%;
-  max-width: 300px;
-  font-size: 1.1rem;
-  padding: 0.8rem 2rem;
-  margin-top: 0.8rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
   &:disabled {
     opacity: 0.5;
-    background-color: #888;
-    border-color: #666;
     cursor: not-allowed;
   }
   
-  @media (orientation: landscape) {
-    margin: 0.5rem auto;
-    max-width: 280px;
-    font-size: 1rem;
-    padding: 0.6rem 1.5rem;
-    align-self: center;
+  svg {
+    font-size: 1.2rem;
+  }
+`;
+
+export const SubmitButton = styled(motion.button)`
+  background-color: ${({ theme }) => theme.colors.accent};
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.fast};
+  box-shadow: ${({ theme }) => theme.shadows.small};
+  
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  svg {
+    font-size: 1.2rem;
+  }
+`;
+
+export const StartButton = styled(motion.button)`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.large};
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.fast};
+  box-shadow: ${({ theme }) => theme.shadows.medium};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-3px);
+    box-shadow: ${({ theme }) => theme.shadows.large};
+  }
+  
+  svg {
+    font-size: 1.5rem;
+  }
+`;
+
+export const RestartButton = styled(motion.button)`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.fast};
+  box-shadow: ${({ theme }) => theme.shadows.small};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondary};
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
+  }
+  
+  svg {
+    font-size: 1.2rem;
+  }
+`;
+
+export const HintButton = styled(motion.button)`
+  background-color: ${({ theme }) => theme.colors.accent};
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.fast};
+  box-shadow: ${({ theme }) => theme.shadows.small};
+  
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  svg {
+    font-size: 1.2rem;
   }
 `;
 
@@ -559,4 +619,26 @@ export const ErrorMessage = styled(MessageContainer)`
 
 export const SuccessMessage = styled(MessageContainer)`
   color: ${({ theme }) => theme.colors.success};
+`;
+
+export const PreparatiDisplay = styled(motion.div)`
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  height: 120px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.borderRadius.large};
+  box-shadow: ${({ theme }) => theme.shadows.medium};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary} 0%, ${({ theme }) => theme.colors.secondary} 100%);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  @media (orientation: landscape) {
+    height: 90px;
+    font-size: 1.5rem;
+    width: 180px;
+  }
 `;
