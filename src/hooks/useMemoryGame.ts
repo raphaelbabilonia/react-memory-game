@@ -32,7 +32,7 @@ const useMemoryGame = ({
   debug = false
 }: UseMemoryGameProps = {}): UseMemoryGameReturn => {
   // Check for debug level in localStorage
-  const getInitialLevel = () => {
+  const getInitialLevel = useCallback(() => {
     try {
       const debugLevel = localStorage.getItem('debug_level');
       if (debugLevel && !isNaN(Number(debugLevel))) {
@@ -43,7 +43,7 @@ const useMemoryGame = ({
       console.error('Error reading from localStorage', e);
     }
     return initialLevel;
-  };
+  }, [initialLevel]);
 
   const [sequence, setSequence] = useState<number[]>([]);
   const [userInput, setUserInput] = useState<string>('');
